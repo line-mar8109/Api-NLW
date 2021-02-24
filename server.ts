@@ -2,7 +2,7 @@ import express, { request, response } from 'express';
 
 
 const app = express();
-
+app.use(express.json());
 
 //http://localhost:3333/users
 app.get("/users", (request, response) => {
@@ -11,7 +11,9 @@ app.get("/users", (request, response) => {
 })
 
 app.post("/users", (request, response) =>{
-    return response.json({message: "os dados foram salvos com sucesso!"});
+    const users = request.body;
+    console.log(request.body);
+    return response.status(201).json(users)
 })
 
 app.listen(3333, () => {
